@@ -83,7 +83,7 @@ object Build extends Build {
     pomIncludeRepository := { _ => false},
     publishArtifact in Test := false,
     publishMavenStyle := true,
-    credentials += Credentials("Repository Archiva Managed internal Repository", "molokai.hulaa.com", "hulaa", "Localhost123"),
+    credentials += Credentials("Repository Archiva Managed internal Repository", "molokai.hulaa.com", "xx", "xx"),
     resolvers += Resolver.url("Hulaa Archiva", url("http://molokai.hulaa.com:8084/repository/internal/"))(Resolver.mavenStylePatterns),
     publishTo <<= version { (v: String) =>
       val archiva = "http://molokai.hulaa.com:8084"
