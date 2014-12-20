@@ -2,8 +2,6 @@ package org.altairtoolkit.id
 
 import java.util.concurrent.atomic.AtomicInteger
 
-import org.altairtoolkit.id.HulaaSupplier
-
 /**
  * Deny Prasetyo,S.T
  * Java(Scala) Developer and Trainer
