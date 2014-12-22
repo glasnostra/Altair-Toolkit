@@ -30,7 +30,6 @@ object Build extends Build {
         "org.json4s" %% "json4s-jackson" % Json4sVersion,
         "org.apache.httpcomponents" % "httpclient" % HttpClientVersion,
         "org.imgscalr" % "imgscalr-lib" % ImgScalrVersion,
-        "com.amazonaws" % "aws-java-sdk" % AwsJavaVersion,
         "org.jsoup" % "jsoup" % JsoupVersion,
         "com.sun.jersey" % "jersey-client" % JerseyVersion,
         "com.sun.jersey" % "jersey-core" % JerseyVersion,
@@ -73,7 +72,6 @@ object Build extends Build {
   val HazelcastVersion = "3.3.2"
   val ImgScalrVersion = "4.2"
   val JsoupVersion = "1.8.+"
-  val AwsJavaVersion = "1.9.3"
   val SlugifyVersion = "2.1.2"
   val JerseyVersion = "1.18.+"
   val QuartzVersion = "2.2.+"
