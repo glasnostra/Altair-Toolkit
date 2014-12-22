@@ -54,7 +54,7 @@ object Build extends Build {
   ).enablePlugins(play.twirl.sbt.SbtTwirl)
   val Organization = "org.altairtoolkit"
   val Name = "Altair-Toolkit"
-  val Version = "1.0.BETA"
+  val Version = "1.0"
   val ScalaVersion = "2.11.4"
   val ScalatraVersion = "2.3.0"
   val SpringVersion = "4.1.1.RELEASE"
@@ -83,13 +83,13 @@ object Build extends Build {
     pomIncludeRepository := { _ => false},
     publishArtifact in Test := false,
     publishMavenStyle := true,
-    credentials += Credentials("Repository Archiva Managed internal Repository", "molokai.hulaa.com", "xx", "xx"),
-    resolvers += Resolver.url("Hulaa Archiva", url("http://molokai.hulaa.com:8084/repository/internal/"))(Resolver.mavenStylePatterns),
+    credentials += Credentials("Sonatype Nexus Repository Manager", "104.207.150.166", "deployment", "Localhost123"),
+    resolvers += Resolver.url("Jasoet Nexus", url("http://104.207.150.166:8081/nexus/content/repositories/releases/"))(Resolver.mavenStylePatterns),
     publishTo <<= version { (v: String) =>
-      val archiva = "http://molokai.hulaa.com:8084"
+      val archiva = "http://104.207.150.166:8081/nexus/"
       if (v.trim.endsWith("-SNAPSHOT"))
-        Some(Resolver.url("snapshots", new URL(archiva + "/repository/internal/"))(Resolver.mavenStylePatterns))
+        Some(Resolver.url("snapshots", new URL(archiva + "content/repositories/snapshots/"))(Resolver.mavenStylePatterns))
       else
-        Some(Resolver.url("release", new URL(archiva + "/repository/internal/"))(Resolver.mavenStylePatterns))
+        Some(Resolver.url("release", new URL(archiva + "content/repositories/releases/"))(Resolver.mavenStylePatterns))
     })
 }
