@@ -1,6 +1,5 @@
 package org.altairtoolkit.slick.sort
 
-import org.elasticsearch.search.sort.SortOrder
 
 /**
  * Deny Prasetyo,S.T
@@ -17,13 +16,7 @@ sealed class Sort(_field: String = "", _direction: String = "") {
   def field = _field
 
   def direction = _direction
-
-  def esOrder(): SortOrder = {
-    _direction match {
-      case "desc" => SortOrder.DESC
-      case _ => SortOrder.ASC
-    }
-  }
+ 
 }
 
 case class Asc(_field: String) extends Sort(_field, "asc")
