@@ -6,8 +6,9 @@ import javax.servlet.ServletContext
 import com.typesafe.scalalogging.Logger
 import org.altairtoolkit.SpringBean
 import org.altairtoolkit.annotation.scalatra.Mapping
+import org.altairtoolkit.locale.I18nMessage
 import org.altairtoolkit.locale.helper.I18nMessage
-import org.altairtoolkit.twirl.ContextHelper
+import org.altairtoolkit.scalatra.helper.ContextHelper
 import org.scalatra.ScalatraServlet
 import org.scalatra.servlet.RichServletContext
 import org.slf4j.LoggerFactory

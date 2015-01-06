@@ -9,7 +9,6 @@ object Build extends Build {
       organization := Organization,
       conflictManager := ConflictManager.latestRevision,
       name := Name,
-      //      publishTo in ThisBuild := Some(Resolver.file("file", new File(Path.userHome.absolutePath + "/.m2/repository"))),
       version := Version,
       scalaVersion in ThisBuild := ScalaVersion,
       resolvers += Classpaths.typesafeReleases,
@@ -26,18 +25,18 @@ object Build extends Build {
         "org.apache.tomcat" % "dbcp" % DbcpVersion,
         "javax.servlet" % "javax.servlet-api" % "3.1.0",
         "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion,
-//        "org.mariadb.jdbc" % "mariadb-java-client" % MariaDbClientVersion,
         "org.json4s" %% "json4s-jackson" % Json4sVersion,
         "org.apache.httpcomponents" % "httpclient" % HttpClientVersion,
         "org.imgscalr" % "imgscalr-lib" % ImgScalrVersion,
-//        "org.jsoup" % "jsoup" % JsoupVersion,
-//        "com.sun.jersey" % "jersey-client" % JerseyVersion,
-//        "com.sun.jersey" % "jersey-core" % JerseyVersion,
-//        "com.sun.jersey.contribs" % "jersey-multipart" % JerseyVersion,
         "com.github.slugify" % "slugify" % SlugifyVersion,
         "org.quartz-scheduler" % "quartz" % QuartzVersion,
-//        "com.sksamuel.elastic4s" %% "elastic4s" % Elastic4s,
         "net.logstash.logback" % "logstash-logback-encoder" % LogstashEncoderVersion
+        //        "org.mariadb.jdbc" % "mariadb-java-client" % MariaDbClientVersion,
+        //        "org.jsoup" % "jsoup" % JsoupVersion,
+        //        "com.sun.jersey" % "jersey-client" % JerseyVersion,
+        //        "com.sun.jersey" % "jersey-core" % JerseyVersion,
+        //        "com.sun.jersey.contribs" % "jersey-multipart" % JerseyVersion,
+        //        "com.sksamuel.elastic4s" %% "elastic4s" % Elastic4s,
         //        "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         //        "org.scalatra" %% "scalatra-auth" % ScalatraVersion,
         //        "org.springframework.security" % "spring-security-web" % SpringSecurityVersion,
@@ -50,10 +49,11 @@ object Build extends Build {
         //        "com.hazelcast" % "hazelcast-wm" % HazelcastVersion,
       )
     )
-  ).enablePlugins(play.twirl.sbt.SbtTwirl)
+  )
+  
   val Organization = "org.altairtoolkit"
   val Name = "Altair-Toolkit"
-  val Version = "1.0"
+  val Version = "1.0-ALPHA"
   val ScalaVersion = "2.11.4"
   val ScalatraVersion = "2.3.0"
   val SpringVersion = "4.1.1.RELEASE"

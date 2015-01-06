@@ -23,7 +23,7 @@ import scala.collection.mutable
  * http://github.com/jasoet
  * http://bitbucket.com/jasoet
  */
-
+//TODO Use Mixin if Possible
 class ScheduleBeanFactory extends ApplicationContextAware with SmartInitializingSingleton with DisposableBean {
 
   val logger = Logger(LoggerFactory.getLogger(this.getClass))

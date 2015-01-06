@@ -1,4 +1,4 @@
-package org.altairtoolkit.twirl
+package org.altairtoolkit.scalatra.helper
 
 import org.altairtoolkit.SpringBean
 

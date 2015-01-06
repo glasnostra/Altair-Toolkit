@@ -29,15 +29,15 @@ class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (Ap
 
   @PostConstruct
   def init() {
-    logger.info("Start Loading Invoker Bootstrap")
+    logger.info("Start Bootstrapping HttpInvoker")
     appContext.getBeansOfType(classOf[HttpInvokerServiceExporter]).asScala.foreach(bean => {
-      logger.info(s"Register Servlet ${bean._1} to ${urlResolver(bean._1)} ")
+      logger.info(s"Register HttpInvoker Servlet ${bean._1} to ${urlResolver(bean._1)} ")
       servletContext.addServlet(bean._1, HttpInvokerHandlerServlet(bean._2)).addMapping(urlResolver(bean._1))
     })
     if (postInit != SpringBean.DEFAULT) {
       postInit(appContext, servletContext)
     }
-    logger.info("Finish Loading Invoker Bootstrap")
+    logger.info("Finish Bootstrapping HttpInvoker")
   }
 
   var servletContext: ServletContext = _
