@@ -30,8 +30,9 @@ object Build extends Build {
         "org.imgscalr" % "imgscalr-lib" % ImgScalrVersion,
         "com.github.slugify" % "slugify" % SlugifyVersion,
         "org.quartz-scheduler" % "quartz" % QuartzVersion,
-        "net.logstash.logback" % "logstash-logback-encoder" % LogstashEncoderVersion
-        //        "org.mariadb.jdbc" % "mariadb-java-client" % MariaDbClientVersion,
+        "net.logstash.logback" % "logstash-logback-encoder" % LogstashEncoderVersion,
+        "org.apache.commons" % "commons-lang3" % CommonsLang3Version,
+                "com.typesafe.play" %% "twirl-api" % TwirlApiVersion
         //        "org.jsoup" % "jsoup" % JsoupVersion,
         //        "com.sun.jersey" % "jersey-client" % JerseyVersion,
         //        "com.sun.jersey" % "jersey-core" % JerseyVersion,
@@ -76,6 +77,8 @@ object Build extends Build {
   val JerseyVersion = "1.18.+"
   val QuartzVersion = "2.2.+"
   val LogstashEncoderVersion = "3.4"
+  val TwirlApiVersion = "1.0.4"
+  val CommonsLang3Version = "3.3.2"
 
   def publishSettings = Seq(
     pomIncludeRepository := { _ => false},
