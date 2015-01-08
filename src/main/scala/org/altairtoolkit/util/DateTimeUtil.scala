@@ -31,4 +31,31 @@ object DateTimeUtil {
     def toLocalDate: LocalDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(o), ZoneId.systemDefault).toLocalDate
   }
 
+  implicit class OptionLocalDateTimeImprovement(val o: Option[LocalDateTime]) {
+    def toOptionMilliSeconds: Option[Long] = o match {
+      case Some(i) => Some(i.atZone(ZoneId.systemDefault).toInstant.toEpochMilli)
+      case None => None
+    }
+  }
+
+  implicit class OptionLocalDateImprovement(val o: Option[LocalDate]) {
+    def toOptionMilliSeconds: Option[Long] = o match {
+      case Some(i) => Some(i.atStartOfDay().atZone(ZoneId.systemDefault).toInstant.toEpochMilli)
+      case None => None
+    }
+  }
+
+  implicit class OptionMilliSecondsToDateTime(val o: Option[Long]) {
+    def toOptionLocalDateTime: Option[LocalDateTime] = o match {
+      case Some(i) => Some(LocalDateTime.ofInstant(Instant.ofEpochMilli(i), ZoneId.systemDefault))
+      case None => None
+    }
+
+
+    def toOptionLocalDate: Option[LocalDate] = o match {
+      case Some(i) => Some(LocalDateTime.ofInstant(Instant.ofEpochMilli(i), ZoneId.systemDefault).toLocalDate)
+      case None => None
+    }
+  }
+
 }
