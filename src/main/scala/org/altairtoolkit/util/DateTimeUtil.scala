@@ -23,6 +23,7 @@ object DateTimeUtil {
   implicit class LocalDateImprovement(val o: LocalDate) {
     def toMilliSeconds: Long = o.atStartOfDay().atZone(ZoneId.systemDefault).toInstant.toEpochMilli
 
+    def toSqlDate: java.sql.Date = new java.sql.Date(o.atStartOfDay().atZone(ZoneId.systemDefault).toInstant.toEpochMilli)
   }
 
   implicit class MilliSecondsToDateTime(val o: Long) {
@@ -41,6 +42,11 @@ object DateTimeUtil {
   implicit class OptionLocalDateImprovement(val o: Option[LocalDate]) {
     def toOptionMilliSeconds: Option[Long] = o match {
       case Some(i) => Some(i.atStartOfDay().atZone(ZoneId.systemDefault).toInstant.toEpochMilli)
+      case None => None
+    }
+
+    def toOptionSqlDate: Option[java.sql.Date] = o match {
+      case Some(i) => Some(new java.sql.Date(i.atStartOfDay().atZone(ZoneId.systemDefault).toInstant.toEpochMilli))
       case None => None
     }
   }

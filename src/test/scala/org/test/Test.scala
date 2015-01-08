@@ -16,16 +16,10 @@ import org.altairtoolkit.id.AltairSnowFlake
 
 object Test extends App{
   
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
-  println(AltairSnowFlake(8).nextId())
+  0 to 200000 foreach { x =>
+    println(AltairSnowFlake(8).nextId())  
+  }
+  
+  
 
 }
