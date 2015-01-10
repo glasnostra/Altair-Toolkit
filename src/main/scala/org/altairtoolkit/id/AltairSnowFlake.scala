@@ -15,12 +15,12 @@ import java.util.concurrent.atomic.AtomicInteger
 
 case class AltairSnowFlakeId(timestamp: Long, serverId: Int, inc: Int)
 
-object incr extends AtomicInteger(0)
+private[id] object Increment extends AtomicInteger(0)
 
 object AltairSnowFlake {
   val EPOCH: Long = 1288834974657L
 
-  def apply(serverId: Int) = new AltairSnowFlakeIdFactory(serverId, incr)
+  def apply(serverId: Int) = new AltairSnowFlakeIdFactory(serverId, Increment)
 
   def parse(id: Long) = {
     val ts = (id >> 22) + EPOCH
@@ -39,7 +39,6 @@ object AltairSnowFlake {
 
 class AltairSnowFlakeIdFactory(serverId: Int, incr: AtomicInteger) {
   assert(serverId < 64, "Maximum machine id number is 63")
-
 
   def nextId(): Long = synchronized {
     val currentTs = System.currentTimeMillis()
