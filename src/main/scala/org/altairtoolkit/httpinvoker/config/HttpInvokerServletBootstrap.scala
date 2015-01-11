@@ -44,6 +44,7 @@ class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (Ap
       val exporter = new HttpInvokerServiceExporter
       exporter.setService(bean._2)
       exporter.setServiceInterface(annotation.serviceTrait())
+      exporter.afterPropertiesSet()
       servletContext.addServlet(annotation.id(), HttpInvokerHandlerServlet(exporter)).addMapping(urlResolver(annotation.id()))
     })
     if (postInit != SpringBean.DEFAULT) {
