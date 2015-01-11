@@ -33,7 +33,7 @@ object Build extends Build {
         "net.logstash.logback" % "logstash-logback-encoder" % LogstashEncoderVersion,
         "org.apache.commons" % "commons-lang3" % CommonsLang3Version,
         "com.typesafe.play" %% "twirl-api" % TwirlApiVersion,
-        "com.google.guava" % "guava" % GuavaVersion,
+        "com.google.guava" % "guava" % GuavaVersion
         //        "org.imgscalr" % "imgscalr-lib" % ImgScalrVersion,
         //        "com.github.slugify" % "slugify" % SlugifyVersion,
         //        "org.jsoup" % "jsoup" % JsoupVersion,
