@@ -23,6 +23,8 @@ public @interface QuartzEnable {
     String value() default "DEFAULT";
 
     boolean concurrent() default true;
+    
+    boolean autoStart() default true;
 
     CronSchedule[] cron() default {};
 

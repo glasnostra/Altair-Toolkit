@@ -1,6 +1,5 @@
-package org.altairtoolkit.slick
+package org.altairtoolkit.json
 
-import org.altairtoolkit.json.Jsonable
 import org.json4s.JsonAST.JObject
 import org.json4s.JsonDSL._
 

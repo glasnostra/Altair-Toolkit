@@ -3,7 +3,7 @@ package org.altairtoolkit.locale.helper
 import java.util.Locale
 
 import org.altairtoolkit.SpringBean
-import org.altairtoolkit.locale.config.{LocaleMessageBundle, LocaleProperties}
+import org.altairtoolkit.locale.config.LocaleProperties
 import org.apache.commons.lang3.LocaleUtils
 import org.springframework.context.ApplicationContext
 

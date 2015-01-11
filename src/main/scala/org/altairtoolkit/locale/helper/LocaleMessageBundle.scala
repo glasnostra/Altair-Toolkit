@@ -1,4 +1,4 @@
-package org.altairtoolkit.locale.config
+package org.altairtoolkit.locale.helper
 
 import java.util.Locale
 

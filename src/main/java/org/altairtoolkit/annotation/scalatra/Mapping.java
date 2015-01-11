@@ -1,5 +1,9 @@
 package org.altairtoolkit.annotation.scalatra;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Deny Prasetyo,S.T
  * Java(Scala) Developer and Trainer
@@ -10,15 +14,6 @@ package org.altairtoolkit.annotation.scalatra;
  * http://bitbucket.com/jasoet
  */
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-/**
- * @author Deny Prasetyo
- */
 @Target(TYPE)
 @Retention(RUNTIME)
 public @interface Mapping {

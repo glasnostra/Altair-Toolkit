@@ -3,7 +3,7 @@ package org.altairtoolkit.locale.config
 import java.util.Locale
 import javax.annotation.PostConstruct
 
-import org.altairtoolkit.locale.helper.I18nMessage
+import org.altairtoolkit.locale.helper.{LocaleMessageBundle, I18nMessage}
 import org.springframework.context.{ApplicationContext, ApplicationContextAware}
 
 /**

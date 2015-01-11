@@ -13,12 +13,9 @@ package org.altairtoolkit.slick.generator
 
 import scala.slick.codegen.{AbstractSourceCodeGenerator, OutputHelpers}
 import scala.slick.{model => m}
+import org.altairtoolkit.util.WordUtil._
 
 
-/**
- * My custom slick code generator to fit my taste.
- * @param model Slick data model for which code should be generated.
- */
 class AltairCodeGenerator(model: m.Model)
   extends AbstractSourceCodeGenerator(model) with OutputHelpers {
   // "Tying the knot": making virtual classes concrete
@@ -38,14 +35,12 @@ class AltairCodeGenerator(model: m.Model)
           "import scala.slick.jdbc.{GetResult => GR}\n"
       } else ""
         ) +
-      "\n/** DDL for all tables. Call .create to execute. */\nlazy val ddl = " + tables.map(t => jamak(t.TableValue.name.toString) + ".ddl").mkString(" ++ ") +
+      "\n/** DDL for all tables. Call .create to execute. */\nlazy val ddl = " + tables.map(t => t.TableValue.name.toString.pluralize + ".ddl").mkString(" ++ ") +
       "\n\n" +
       tables.map(_.code.mkString("\n")).mkString("\n\n")
   }
 
   override def entityName: (String) => String = (dbName: String) => dbName.toCamelCase
-
-  protected def jamak(str: String) = if (str.endsWith("s")) str + "es" else str + "s"
 
   class TableDef(model: m.Table) extends super.TableDef(model) {
     // Using defs instead of (caching) lazy vals here to provide consitent interface to the user.
@@ -76,7 +71,7 @@ class ${name}Table(_tableTag: Tag) extends Table[$elementType](_tableTag, ${args
     type TableValue = TableValueDef
 
     def TableValue = new TableValue {
-      override def code: String = s"lazy val ${jamak(name.toString)} = new TableQuery(tag => new ${TableClass.name}Table(tag))"
+      override def code: String = s"object ${name.toString.pluralize} extends TableQuery(tag => new ${TableClass.name}Table(tag))"
     }
 
     type Column = ColumnDef

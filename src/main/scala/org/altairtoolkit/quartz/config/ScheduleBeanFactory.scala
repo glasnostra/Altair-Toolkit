@@ -23,8 +23,8 @@ import scala.collection.mutable
  * http://github.com/jasoet
  * http://bitbucket.com/jasoet
  */
-//TODO Use Mixin if Possible
-class ScheduleBeanFactory extends ApplicationContextAware with SmartInitializingSingleton with DisposableBean {
+
+class ScheduleBeanFactory(postInit: (Map[String, AltairScheduler]) => Unit = SpringBean.DEFAULT) extends ApplicationContextAware with SmartInitializingSingleton with DisposableBean {
 
   val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
@@ -35,7 +35,7 @@ class ScheduleBeanFactory extends ApplicationContextAware with SmartInitializing
   }
 
   override def afterSingletonsInstantiated(): Unit = {
-    val scheduleMap: mutable.Map[String, Scheduler] = mutable.Map()
+    val scheduleMap: mutable.Map[String, AltairScheduler] = mutable.Map()
     filterAndGroup(this.applicationContext.getBeansWithAnnotation(classOf[QuartzEnable]).asScala.toMap).foreach(bean => {
       bean._2.foreach(qc => {
         val triggers = scala.collection.mutable.ListBuffer.empty[Trigger]
@@ -89,32 +89,45 @@ class ScheduleBeanFactory extends ApplicationContextAware with SmartInitializing
           schedulerFactoryBean.setTriggers(triggers.toList: _*)
           schedulerFactoryBean.setSchedulerName(qc.schedulerName)
           schedulerFactoryBean.afterPropertiesSet()
-          scheduleMap.put(qc.schedulerName, schedulerFactoryBean.getObject)
+          scheduleMap.put(qc.schedulerName, AltairScheduler(schedulerFactoryBean.getObject, qc))
         }
 
       })
     })
     SchedulerHelper.init(scheduleMap)
 
-    SchedulerHelper.startAll()
-    logger.info(s"Start All Scheduler....")
+    if (postInit != SpringBean.DEFAULT) {
+      postInit(SchedulerHelper.map())
+    }
+
+    scheduleMap.foreach(map => {
+      val (name, altairScheduler) = map
+      if (altairScheduler.config.autoStart) {
+        logger.info(s"Starting AutoStart Scheduler $name")
+        altairScheduler.scheduler.start()
+      }
+    })
+
   }
 
-  private case class QuartzAnnotationConfig(schedulerName: String, beanName: String, bean: AnyRef, concurrent: Boolean, interval: List[IntervalSchedule], cron: List[CronSchedule])
 
   private def filterAndGroup(values: Map[String, AnyRef]): Map[String, List[QuartzAnnotationConfig]] = {
-    values.map(value => {
+    values.map(f = value => {
       val name = value._1
       val bean = value._2
       val ann = bean.getClass.getAnnotation(classOf[QuartzEnable])
-      QuartzAnnotationConfig(ann.value(), name, bean, ann.concurrent(), ann.interval().toList, ann.cron().toList)
+      QuartzAnnotationConfig(schedulerName = ann.value(), beanName = name, bean = bean, concurrent = ann.concurrent(), autoStart = ann.autoStart(), interval = ann.interval().toList, cron = ann.cron().toList)
     }).toList.groupBy(value => {
       value.schedulerName
     })
   }
 
   override def destroy(): Unit = {
-    logger.info(s"Stop All Scheduler....")
+    logger.info(s"Stop All Running Scheduler....")
     SchedulerHelper.stopAll()
   }
 }
+
+case class QuartzAnnotationConfig(schedulerName: String, beanName: String, bean: AnyRef, concurrent: Boolean, autoStart: Boolean, interval: List[IntervalSchedule], cron: List[CronSchedule])
+
+case class AltairScheduler(scheduler: Scheduler, config: QuartzAnnotationConfig)

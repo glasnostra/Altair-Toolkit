@@ -1,5 +1,6 @@
 package org.altairtoolkit.quartz.helper
 
+import org.altairtoolkit.quartz.config.{AltairScheduler, QuartzAnnotationConfig}
 import org.quartz.Scheduler
 
 import scala.collection.mutable
@@ -16,28 +17,30 @@ import scala.util.Try
  */
 
 object SchedulerHelper {
-  private var _schedules: mutable.Map[String, Scheduler] = mutable.Map()
+  private var _schedules: mutable.Map[String, AltairScheduler] = mutable.Map()
 
-  def init(schedules: mutable.Map[String, Scheduler]) = {
+  def init(schedules: mutable.Map[String, AltairScheduler]) = {
     this._schedules = schedules
   }
 
-  def get(name: String): Option[Scheduler] = {
+  def get(name: String): Option[AltairScheduler] = {
     this._schedules.get(name)
   }
 
-  def list(): List[Scheduler] = {
+  def list(): List[AltairScheduler] = {
     this._schedules.map(x => x._2).toList
   }
 
-  def map(): Map[String, Scheduler] = {
+  def map(): Map[String, AltairScheduler] = {
     this._schedules.toMap
   }
+  
 
   def startAll(): Try[Unit] = {
     Try(this.map().foreach(sc => {
-      if (sc._2.isInStandbyMode || sc._2.isShutdown) {
-        sc._2.start()
+      val (_, altairScheduler) = sc
+      if (altairScheduler.scheduler.isInStandbyMode || altairScheduler.scheduler.isShutdown) {
+        altairScheduler.scheduler.start()
       }
     }))
   }
@@ -46,8 +49,9 @@ object SchedulerHelper {
   def stopAll(): Try[Unit] = {
     Try(
       this.map().foreach(sc => {
-        if (sc._2.isStarted || sc._2.isInStandbyMode) {
-          sc._2.shutdown()
+        val (_, altairScheduler) = sc
+        if (altairScheduler.scheduler.isStarted || altairScheduler.scheduler.isInStandbyMode) {
+          altairScheduler.scheduler.shutdown()
         }
       })
     )
