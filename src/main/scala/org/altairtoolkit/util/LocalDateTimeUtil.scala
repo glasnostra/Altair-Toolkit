@@ -1,7 +1,7 @@
 package org.altairtoolkit.util
 
 import java.time.format.DateTimeFormatter
-import java.time.{LocalDate, Instant, LocalDateTime, ZoneId}
+import java.time.{Instant, LocalDate, LocalDateTime, ZoneId}
 
 /**
  * Deny Prasetyo,S.T

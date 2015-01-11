@@ -1,7 +1,7 @@
 package org.altairtoolkit.scalatra.helper
 
-import org.altairtoolkit.util.StringUtil._
 import org.altairtoolkit.slick.sort.Sort
+import org.altairtoolkit.util.StringUtil._
 import org.scalatra.Params
 
 /**

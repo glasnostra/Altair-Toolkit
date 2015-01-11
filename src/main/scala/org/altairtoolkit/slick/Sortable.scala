@@ -1,7 +1,7 @@
 package org.altairtoolkit.slick
 
 
-import org.altairtoolkit.slick.sort.{Desc, Asc, Sort}
+import org.altairtoolkit.slick.sort.{Asc, Desc, Sort}
 
 import scala.slick.lifted.{Column, ColumnOrdered}
 

@@ -6,7 +6,6 @@ import javax.servlet.ServletContext
 import com.typesafe.scalalogging.Logger
 import org.altairtoolkit.SpringBean
 import org.altairtoolkit.annotation.scalatra.Mapping
-import org.altairtoolkit.locale.I18nMessage
 import org.altairtoolkit.scalatra.helper.ContextHelper
 import org.scalatra.ScalatraServlet
 import org.scalatra.servlet.RichServletContext
@@ -33,9 +32,9 @@ class ScalatraBootstrap(postInit: (ApplicationContext, ServletContext) => Unit =
 
   @PostConstruct
   def init() {
+    logger.info("Start Mounting Scalatra Servlets")
     val richContext = new RichServletContext(servletContext)
     ContextHelper.init(servletContext)
-    I18nMessage.init(appContext)
     val resources = appContext.getBeansWithAnnotation(classOf[Mapping])
     resources.values().asScala.toList.sortBy(x => {
       x.getClass.getAnnotation(classOf[Mapping]).order()
@@ -45,26 +44,27 @@ class ScalatraBootstrap(postInit: (ApplicationContext, ServletContext) => Unit =
         if (!path.startsWith("/")) path = "/" + path
         logger.info("Mounting " + servlet.getClass.getCanonicalName + " to [" + path + "]")
         richContext.mount(servlet, path)
-      case _ =>
+      case bean => logger.info(s"Unsupported Servlet detected ${bean.getClass.getCanonicalName}")
     }
 
     if (postInit != SpringBean.DEFAULT) {
       postInit(appContext, servletContext)
     }
 
-    logger.info("Finish Loading Bootstrap")
+    logger.info("Finish Mounting Scalatra Servlets")
   }
 
   var servletContext: ServletContext = _
   var appContext: ApplicationContext = _
 
-  def setServletContext(servletContext: ServletContext): Unit = this.servletContext = servletContext
+  def setServletContext(servletContext: ServletContext): Unit = {
+    require(servletContext != SpringBean.DEFAULT, "Servlet Context can not  Null")
+    this.servletContext = servletContext
+  }
 
-  def setApplicationContext(appContext: ApplicationContext): Unit = this.appContext = appContext
-}
-
-object ScalatraBootstrap {
-  def apply(postInit: (ApplicationContext, ServletContext) => Unit = SpringBean.DEFAULT) = {
-    new ScalatraBootstrap(postInit)
+  def setApplicationContext(appContext: ApplicationContext): Unit = {
+    require(appContext != SpringBean.DEFAULT, "Application Context can not  Null")
+    this.appContext = appContext
   }
 }
+ 
