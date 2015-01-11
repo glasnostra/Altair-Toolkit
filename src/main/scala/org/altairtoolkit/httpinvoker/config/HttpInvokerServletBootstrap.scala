@@ -8,6 +8,7 @@ import org.altairtoolkit.SpringBean
 import org.altairtoolkit.annotation.invoker.HttpInvokerEnable
 import org.altairtoolkit.httpinvoker.handler.HttpInvokerHandlerServlet
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.SmartInitializingSingleton
 import org.springframework.context.{ApplicationContext, ApplicationContextAware}
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter
 import org.springframework.web.context.ServletContextAware
@@ -25,11 +26,17 @@ import scala.collection.JavaConverters._
  *
  */
 
-class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (ApplicationContext, ServletContext) => Unit = SpringBean.DEFAULT) extends ApplicationContextAware with ServletContextAware {
+class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (ApplicationContext, ServletContext) => Unit = SpringBean.DEFAULT) extends ApplicationContextAware with SmartInitializingSingleton with ServletContextAware {
   private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
-  @PostConstruct
-  def init() {
+  var servletContext: ServletContext = _
+  var appContext: ApplicationContext = _
+
+  def setServletContext(servletContext: ServletContext): Unit = this.servletContext = servletContext
+
+  def setApplicationContext(appContext: ApplicationContext): Unit = this.appContext = appContext
+
+  override def afterSingletonsInstantiated(): Unit = {
     logger.info("Start Bootstrapping HttpInvoker")
     appContext.getBeansWithAnnotation(classOf[HttpInvokerEnable]).asScala.foreach(bean => {
       val annotation = bean.getClass.getAnnotation(classOf[HttpInvokerEnable])
@@ -44,12 +51,5 @@ class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (Ap
     }
     logger.info("Finish Bootstrapping HttpInvoker")
   }
-
-  var servletContext: ServletContext = _
-  var appContext: ApplicationContext = _
-
-  def setServletContext(servletContext: ServletContext): Unit = this.servletContext = servletContext
-
-  def setApplicationContext(appContext: ApplicationContext): Unit = this.appContext = appContext
 }
  
