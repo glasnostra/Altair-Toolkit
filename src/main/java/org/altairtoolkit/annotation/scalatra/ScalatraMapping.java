@@ -1,9 +1,11 @@
 package org.altairtoolkit.annotation.scalatra;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
 /**
  * Deny Prasetyo,S.T
  * Java(Scala) Developer and Trainer
@@ -16,8 +18,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target(TYPE)
 @Retention(RUNTIME)
-public @interface Mapping {
+public @interface ScalatraMapping {
     String value();
 
     int order() default 0;
+
+    boolean welcome() default false;
 }

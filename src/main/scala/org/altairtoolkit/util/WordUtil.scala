@@ -1,6 +1,6 @@
 package org.altairtoolkit.util
 
-import org.altairtoolkit.Inflector
+import Inflector
 
 /**
  * Created by Deny Prasetyo,S.T

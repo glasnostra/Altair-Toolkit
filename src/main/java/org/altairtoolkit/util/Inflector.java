@@ -1,4 +1,4 @@
-package org.altairtoolkit;
+package org.altairtoolkit.util;
 
 /*
  * JBoss DNA (http://www.jboss.org/dna)

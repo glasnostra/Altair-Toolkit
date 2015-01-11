@@ -5,7 +5,7 @@ import javax.servlet.ServletContext
 
 import com.typesafe.scalalogging.Logger
 import org.altairtoolkit.SpringBean
-import org.altairtoolkit.annotation.scalatra.Mapping
+import org.altairtoolkit.annotation.scalatra.ScalatraMapping
 import org.altairtoolkit.scalatra.helper.ContextHelper
 import org.scalatra.ScalatraServlet
 import org.scalatra.servlet.RichServletContext
@@ -35,12 +35,18 @@ class ScalatraBootstrap(postInit: (ApplicationContext, ServletContext) => Unit =
     logger.info("Start Mounting Scalatra Servlets")
     val richContext = new RichServletContext(servletContext)
     ContextHelper.init(servletContext)
-    val resources = appContext.getBeansWithAnnotation(classOf[Mapping])
+    val resources = appContext.getBeansWithAnnotation(classOf[ScalatraMapping])
     resources.values().asScala.toList.sortBy(x => {
-      x.getClass.getAnnotation(classOf[Mapping]).order()
+      val annotation = x.getClass.getAnnotation(classOf[ScalatraMapping])
+      if (annotation.welcome()) {
+        Int.MaxValue
+      } else {
+        annotation.order()
+      }
+
     }).reverse.foreach {
       case servlet: ScalatraServlet =>
-        var path = servlet.getClass.getAnnotation(classOf[Mapping]).value()
+        var path = servlet.getClass.getAnnotation(classOf[ScalatraMapping]).value()
         if (!path.startsWith("/")) path = "/" + path
         logger.info("Mounting " + servlet.getClass.getCanonicalName + " to [" + path + "]")
         richContext.mount(servlet, path)

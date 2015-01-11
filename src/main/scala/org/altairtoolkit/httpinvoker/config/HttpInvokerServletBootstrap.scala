@@ -5,6 +5,8 @@ import javax.servlet.ServletContext
 
 import com.typesafe.scalalogging.Logger
 import org.altairtoolkit.SpringBean
+import org.altairtoolkit.annotation.invoker.HttpInvokerEnable
+import org.altairtoolkit.annotation.scalatra.ScalatraMapping
 import org.altairtoolkit.httpinvoker.handler.HttpInvokerHandlerServlet
 import org.slf4j.LoggerFactory
 import org.springframework.context.{ApplicationContext, ApplicationContextAware}
@@ -30,9 +32,13 @@ class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (Ap
   @PostConstruct
   def init() {
     logger.info("Start Bootstrapping HttpInvoker")
-    appContext.getBeansOfType(classOf[HttpInvokerServiceExporter]).asScala.foreach(bean => {
-      logger.info(s"Register HttpInvoker Servlet ${bean._1} to ${urlResolver(bean._1)} ")
-      servletContext.addServlet(bean._1, HttpInvokerHandlerServlet(bean._2)).addMapping(urlResolver(bean._1))
+    appContext.getBeansWithAnnotation(classOf[HttpInvokerEnable]).asScala.foreach(bean => {
+      val annotation = bean.getClass.getAnnotation(classOf[HttpInvokerEnable])
+      logger.info(s"Register HttpInvoker Servlet ${annotation.id()} to ${urlResolver(annotation.id())} ")
+      val exporter = new HttpInvokerServiceExporter
+      exporter.setService(bean._2)
+      exporter.setServiceInterface(annotation.serviceTrait())
+      servletContext.addServlet(annotation.id(), HttpInvokerHandlerServlet(exporter)).addMapping(urlResolver(annotation.id()))
     })
     if (postInit != SpringBean.DEFAULT) {
       postInit(appContext, servletContext)
@@ -47,9 +53,4 @@ class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (Ap
 
   def setApplicationContext(appContext: ApplicationContext): Unit = this.appContext = appContext
 }
-
-object HttpInvokerServletBootstrap {
-  def apply(urlResolver: (String) => String, postInit: (ApplicationContext, ServletContext) => Unit = SpringBean.DEFAULT) = {
-    new HttpInvokerServletBootstrap(urlResolver, postInit)
-  }
-}
+ 
