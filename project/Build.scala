@@ -57,7 +57,7 @@ object Build extends Build {
 
   val Organization = "org.altairtoolkit"
   val Name = "Altair-Toolkit"
-  val Version = "1.0.RC3"
+  val Version = "1.0.RC4"
   val ScalaVersion = "2.11.4"
   val ScalatraVersion = "2.3.0"
   val SpringVersion = "4.1.4.RELEASE"

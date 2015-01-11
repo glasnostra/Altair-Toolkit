@@ -39,8 +39,8 @@ class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (Ap
   override def afterSingletonsInstantiated(): Unit = {
     logger.info("Start Bootstrapping HttpInvoker")
     appContext.getBeansWithAnnotation(classOf[HttpInvokerEnable]).asScala.foreach(bean => {
-      val annotation = bean.getClass.getAnnotation(classOf[HttpInvokerEnable])
-      logger.info(s"Register HttpInvoker Servlet ${annotation.id()} to ${urlResolver(annotation.id())} ")
+      val annotation = bean._2.getClass.getAnnotation(classOf[HttpInvokerEnable])
+      logger.info(s"Register HttpInvoker Servlet ${annotation.id()}:${annotation.serviceTrait().getSimpleName} to ${urlResolver(annotation.id())} ")
       val exporter = new HttpInvokerServiceExporter
       exporter.setService(bean._2)
       exporter.setServiceInterface(annotation.serviceTrait())
