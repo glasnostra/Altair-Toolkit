@@ -45,4 +45,10 @@ trait GuavaCacheSupport extends CachingConfigurer {
   override def keyGenerator(): KeyGenerator = {
     new SimpleKeyGenerator
   }
+
+  def build(config: CacheBuilder[AnyRef, AnyRef] => CacheBuilder[AnyRef, AnyRef]): GuavaCacheManager = {
+    val cacheManager = new GuavaCacheManager()
+    cacheManager.setCacheBuilder(config(CacheBuilder.newBuilder()))
+    cacheManager
+  }
 }
