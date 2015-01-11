@@ -2,6 +2,9 @@ package org.test
 
 import org.altairtoolkit.id.AltairSnowFlake
 
+import scala.collection.mutable
+import scala.util.Random
+
 /**
  * Created by Deny Prasetyo,S.T
  * Java(Script) Developer and Trainer
@@ -14,12 +17,15 @@ import org.altairtoolkit.id.AltairSnowFlake
  * @jasoet
  */
 
-object Test extends App{
-  
+object Test extends App {
+
+  val set:mutable.Set[Long] = mutable.Set()
   0 to 200000 foreach { x =>
-    println(AltairSnowFlake(8).nextId())  
+    val su = AltairSnowFlake(Random.nextInt(5)).nextId()
+    set += su
+    println(su)
   }
-  
-  
+
+  println(set.size)
 
 }

@@ -1,6 +1,8 @@
 package org.altairtoolkit.id
 
+import java.time.LocalDateTime
 import java.util.concurrent.atomic.AtomicInteger
+import org.altairtoolkit.util.DateTimeUtil._
 
 /**
  * Deny Prasetyo,S.T
@@ -13,21 +15,21 @@ import java.util.concurrent.atomic.AtomicInteger
  *
  */
 
-case class AltairSnowFlakeId(timestamp: Long, serverId: Int, inc: Int)
+case class AltairSnowFlakeId(timestamp: LocalDateTime, serverId: Int, inc: Int)
 
 private[id] object Increment extends AtomicInteger(0)
 
 object AltairSnowFlake {
-  val EPOCH: Long = 1288834974657L
+  val EPOCH: Long = 1420045200000L
 
   def apply(serverId: Int) = new AltairSnowFlakeIdFactory(serverId, Increment)
 
-  def parse(id: Long) = {
+  def parse(id: Long): AltairSnowFlakeId = {
     val ts = (id >> 22) + EPOCH
     val max: Long = 64 - 1l
     val machineId = (id >> 16) & max
     val i = id & max
-    AltairSnowFlakeId(ts, machineId.toInt, i.toInt)
+    AltairSnowFlakeId(ts.toLocalDateTime, machineId.toInt, i.toInt)
   }
 
   implicit def alpha2long(hex: String): Long = java.lang.Long.parseLong(hex.toLowerCase, 36)
