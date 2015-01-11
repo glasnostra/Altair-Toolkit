@@ -1,7 +1,6 @@
 package org.altairtoolkit.quartz.helper
 
-import org.altairtoolkit.quartz.config.{AltairScheduler, QuartzAnnotationConfig}
-import org.quartz.Scheduler
+import org.altairtoolkit.quartz.config.AltairScheduler
 
 import scala.collection.mutable
 import scala.util.Try

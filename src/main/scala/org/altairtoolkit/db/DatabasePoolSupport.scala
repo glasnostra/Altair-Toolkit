@@ -3,12 +3,10 @@ package org.altairtoolkit.db
 import javax.sql.DataSource
 
 import com.typesafe.scalalogging.Logger
-import org.altairtoolkit.SpringBean
 import org.apache.tomcat.dbcp.dbcp.BasicDataSource
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 
-import scala.slick.jdbc.JdbcBackend.DatabaseDef
 import scala.util.Try
 
 /**
@@ -27,9 +25,7 @@ trait DatabasePoolSupport {
   private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   def jdbcConfig: JdbcConfig
-
-  @Bean
-  def databasePool: DatabaseDef 
+ 
 
   def databasePoolConfig(dbcp: BasicDataSource) = {}
 

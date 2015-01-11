@@ -11,9 +11,10 @@ package org.altairtoolkit.slick.generator
  *
  */
 
+import org.altairtoolkit.util.WordUtil._
+
 import scala.slick.codegen.{AbstractSourceCodeGenerator, OutputHelpers}
 import scala.slick.{model => m}
-import org.altairtoolkit.util.WordUtil._
 
 
 class AltairCodeGenerator(model: m.Model)

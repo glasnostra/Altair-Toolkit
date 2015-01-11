@@ -6,7 +6,6 @@ import javax.servlet.ServletContext
 import com.typesafe.scalalogging.Logger
 import org.altairtoolkit.SpringBean
 import org.altairtoolkit.annotation.invoker.HttpInvokerEnable
-import org.altairtoolkit.annotation.scalatra.ScalatraMapping
 import org.altairtoolkit.httpinvoker.handler.HttpInvokerHandlerServlet
 import org.slf4j.LoggerFactory
 import org.springframework.context.{ApplicationContext, ApplicationContextAware}

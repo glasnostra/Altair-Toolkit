@@ -5,7 +5,7 @@ import org.apache.http.impl.client.{CloseableHttpClient, HttpClientBuilder}
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager
 import org.slf4j.LoggerFactory
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory
-import org.springframework.remoting.httpinvoker.{HttpInvokerProxyFactoryBean, HttpComponentsHttpInvokerRequestExecutor}
+import org.springframework.remoting.httpinvoker.{HttpComponentsHttpInvokerRequestExecutor, HttpInvokerProxyFactoryBean}
 
 /**
  * Created by Deny Prasetyo,S.T
