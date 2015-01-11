@@ -32,7 +32,8 @@ object Build extends Build {
         "org.quartz-scheduler" % "quartz" % QuartzVersion,
         "net.logstash.logback" % "logstash-logback-encoder" % LogstashEncoderVersion,
         "org.apache.commons" % "commons-lang3" % CommonsLang3Version,
-        "com.typesafe.play" %% "twirl-api" % TwirlApiVersion
+        "com.typesafe.play" %% "twirl-api" % TwirlApiVersion,
+        "com.google.guava" % "guava" % GuavaVersion
         //        "org.imgscalr" % "imgscalr-lib" % ImgScalrVersion,
         //        "com.github.slugify" % "slugify" % SlugifyVersion,
         //        "org.jsoup" % "jsoup" % JsoupVersion,
@@ -56,7 +57,7 @@ object Build extends Build {
 
   val Organization = "org.altairtoolkit"
   val Name = "Altair-Toolkit"
-  val Version = "1.0.1"
+  val Version = "1.0.RC1"
   val ScalaVersion = "2.11.4"
   val ScalatraVersion = "2.3.0"
   val SpringVersion = "4.1.4.RELEASE"
@@ -82,6 +83,7 @@ object Build extends Build {
   val TwirlApiVersion = "1.0.4"
   val CommonsLang3Version = "3.3.2"
   val ServletApiVersion = "3.1.0"
+  val GuavaVersion = "18.0"
 
   def publishSettings = Seq(
     pomIncludeRepository := { _ => false},
