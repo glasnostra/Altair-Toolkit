@@ -22,7 +22,6 @@ import org.springframework.context.annotation.Bean
  * [at] jasoet
  */
 
-@EnableCaching
 trait GuavaCacheSupport extends CachingConfigurer {
   private val logger = Logger(LoggerFactory.getLogger(this.getClass))
   

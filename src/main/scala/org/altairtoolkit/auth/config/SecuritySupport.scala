@@ -21,7 +21,6 @@ import org.springframework.security.core.userdetails.{UserDetails, UserDetailsSe
  * [at] jasoet
  */
 
-@EnableWebSecurity
 trait SecuritySupport extends WebSecurityConfigurerAdapter {
 
   @Bean
