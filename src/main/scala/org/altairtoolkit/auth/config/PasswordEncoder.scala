@@ -20,4 +20,13 @@ object PasswordEncoder {
   def apply() = {
     encoder
   }
+
+  def encode(rawPassword: String): String = {
+    encoder.encode(rawPassword)
+  }
+
+  def matches(rawPassword: String, encodedPassword: String): Boolean = {
+    encoder.matches(rawPassword, encodedPassword)
+  }
+
 }
