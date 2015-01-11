@@ -1,6 +1,5 @@
 package org.altairtoolkit.util
 
-import Inflector
 
 /**
  * Created by Deny Prasetyo,S.T

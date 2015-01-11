@@ -23,17 +23,18 @@ object Build extends Build {
         "org.springframework" % "spring-tx" % SpringVersion force(),
         "org.springframework.security" % "spring-security-core" % SpringSecurityVersion,
         "org.springframework.security" % "spring-security-config" % SpringSecurityVersion,
+        "org.springframework.security" % "spring-security-web" % SpringSecurityVersion,
         "org.apache.tomcat" % "dbcp" % DbcpVersion,
-        "javax.servlet" % "javax.servlet-api" % "3.1.0",
+        "javax.servlet" % "javax.servlet-api" % ServletApiVersion,
         "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion,
         "org.json4s" %% "json4s-jackson" % Json4sVersion,
         "org.apache.httpcomponents" % "httpclient" % HttpClientVersion,
-        "org.imgscalr" % "imgscalr-lib" % ImgScalrVersion,
-        "com.github.slugify" % "slugify" % SlugifyVersion,
         "org.quartz-scheduler" % "quartz" % QuartzVersion,
         "net.logstash.logback" % "logstash-logback-encoder" % LogstashEncoderVersion,
         "org.apache.commons" % "commons-lang3" % CommonsLang3Version,
-                "com.typesafe.play" %% "twirl-api" % TwirlApiVersion
+        "com.typesafe.play" %% "twirl-api" % TwirlApiVersion
+        //        "org.imgscalr" % "imgscalr-lib" % ImgScalrVersion,
+        //        "com.github.slugify" % "slugify" % SlugifyVersion,
         //        "org.jsoup" % "jsoup" % JsoupVersion,
         //        "com.sun.jersey" % "jersey-client" % JerseyVersion,
         //        "com.sun.jersey" % "jersey-core" % JerseyVersion,
@@ -52,13 +53,13 @@ object Build extends Build {
       )
     )
   )
-  
+
   val Organization = "org.altairtoolkit"
   val Name = "Altair-Toolkit"
-  val Version = "1.0"
+  val Version = "1.0.1"
   val ScalaVersion = "2.11.4"
   val ScalatraVersion = "2.3.0"
-  val SpringVersion = "4.1.1.RELEASE"
+  val SpringVersion = "4.1.4.RELEASE"
   val SpringSecurityVersion = "3.2.5.RELEASE"
   val DbcpVersion = "6.0.41"
   val MariaDbClientVersion = "1.1.7"
@@ -80,6 +81,7 @@ object Build extends Build {
   val LogstashEncoderVersion = "3.4"
   val TwirlApiVersion = "1.0.4"
   val CommonsLang3Version = "3.3.2"
+  val ServletApiVersion = "3.1.0"
 
   def publishSettings = Seq(
     pomIncludeRepository := { _ => false},
