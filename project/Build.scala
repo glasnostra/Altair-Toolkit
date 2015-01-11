@@ -33,7 +33,8 @@ object Build extends Build {
         "net.logstash.logback" % "logstash-logback-encoder" % LogstashEncoderVersion,
         "org.apache.commons" % "commons-lang3" % CommonsLang3Version,
         "com.typesafe.play" %% "twirl-api" % TwirlApiVersion,
-        "com.google.guava" % "guava" % GuavaVersion
+        "com.google.guava" % "guava" % GuavaVersion,
+        "javax.annotation" % "javax.annotation-api" % JavacAnnotationVersion
         //        "org.imgscalr" % "imgscalr-lib" % ImgScalrVersion,
         //        "com.github.slugify" % "slugify" % SlugifyVersion,
         //        "org.jsoup" % "jsoup" % JsoupVersion,
@@ -77,6 +78,7 @@ object Build extends Build {
   val CommonsLang3Version = "3.3.2"
   val ServletApiVersion = "3.1.0"
   val GuavaVersion = "18.0"
+  val JavacAnnotationVersion = "1.2"
 
   def publishSettings = Seq(
     pomIncludeRepository := { _ => false},
