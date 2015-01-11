@@ -22,6 +22,7 @@ object Build extends Build {
         "org.springframework" % "spring-context-support" % SpringVersion force(),
         "org.springframework" % "spring-tx" % SpringVersion force(),
         "org.springframework.security" % "spring-security-core" % SpringSecurityVersion,
+        "org.springframework.security" % "spring-security-config" % SpringSecurityVersion,
         "org.apache.tomcat" % "dbcp" % DbcpVersion,
         "javax.servlet" % "javax.servlet-api" % "3.1.0",
         "com.typesafe.scala-logging" %% "scala-logging" % ScalaLoggingVersion,
