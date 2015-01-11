@@ -26,7 +26,7 @@ import scala.collection.mutable
 
 class ScheduleBeanFactory(postInit: (Map[String, AltairScheduler]) => Unit = SpringBean.DEFAULT) extends ApplicationContextAware with SmartInitializingSingleton with DisposableBean {
 
-  val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   private var applicationContext: ApplicationContext = SpringBean.DEFAULT
 

@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean
  */
 
 trait ScalatraSupport {
-  val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   def postInit(appContext: ApplicationContext, servletContext: ServletContext): Unit = {}
 

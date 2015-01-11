@@ -28,7 +28,7 @@ import scala.collection.JavaConverters._
 
 
 class ScalatraBootstrap(postInit: (ApplicationContext, ServletContext) => Unit = SpringBean.DEFAULT) extends ApplicationContextAware with ServletContextAware {
-  val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   @PostConstruct
   def init() {

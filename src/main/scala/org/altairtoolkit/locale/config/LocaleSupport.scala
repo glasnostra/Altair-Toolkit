@@ -19,7 +19,7 @@ import org.springframework.context.annotation.{Bean, Scope}
  */
 
 trait LocaleSupport {
-  val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   def defaultLocale: Locale = {
     Locale.ENGLISH

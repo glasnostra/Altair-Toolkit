@@ -27,7 +27,7 @@ import scala.collection.JavaConverters._
  */
 
 class HttpInvokerServletBootstrap(urlResolver: (String) => String, postInit: (ApplicationContext, ServletContext) => Unit = SpringBean.DEFAULT) extends ApplicationContextAware with ServletContextAware {
-  val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   @PostConstruct
   def init() {

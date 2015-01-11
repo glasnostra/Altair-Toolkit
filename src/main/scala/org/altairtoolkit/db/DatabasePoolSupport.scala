@@ -24,7 +24,7 @@ import scala.util.Try
  */
 
 trait DatabasePoolSupport {
-  val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   def jdbcConfig: JdbcConfig
 

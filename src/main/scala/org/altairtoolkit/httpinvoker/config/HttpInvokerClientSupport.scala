@@ -20,7 +20,7 @@ import org.springframework.remoting.httpinvoker.{HttpInvokerProxyFactoryBean, Ht
  */
 
 trait HttpInvokerClientSupport {
-  val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   val httpClientPoolMaxTotal: Int = 10
   val httpClientDefaultMaxPerRoute: Int = 5

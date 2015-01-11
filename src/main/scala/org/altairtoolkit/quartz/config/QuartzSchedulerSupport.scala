@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Bean
  */
 
 trait QuartzSchedulerSupport {
-  val logger = Logger(LoggerFactory.getLogger(this.getClass))
+  private val logger = Logger(LoggerFactory.getLogger(this.getClass))
 
   def postInit(schedulerMap: Map[String, AltairScheduler]) = {}
 
